@@ -40,6 +40,23 @@ do
         echo "	\$(CC) \$(CFLAGS) -o \$@ \$<">>makefile
 	echo "">>makefile
 	touch $filec.c
+	echo "Vuoi autocompliare $filec.c?"
+	read answ
+	case $answ in
+        	s* | S* | y* | Y*)echo "#include <stdlib.h>">>$filec.c
+		       		  echo "#include <unistd.h>">>$filec.c
+			  	  echo "#include <fcntl.h>">>$filec.c
+				  echo "#include <stdio.h>">>$filec.c
+				  echo "#include <sys/wait.h>">>$filec.c
+				  echo "">>$filec.c
+				  echo "int main(int argc, char const *argv[]){">>$filec.c
+				  echo "	/*code*/">>$filec.c
+				  echo "	return 0;">>$filec.c
+				  echo "}">>$filec.c
+                            	  ;;
+                        	*)echo "Hai deciso di non autocompilare";;
+	esac
+
 	cd ..
 	i=`expr $i + 1`
 done
